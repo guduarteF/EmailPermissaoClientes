@@ -1,0 +1,58 @@
+﻿@page "/formulario"
+<h1>Formulário</h1>
+
+<h3 class="text-dark">Editar</h3>
+<hr />
+<h4> {Nome do usuário} </h4
+    <hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Formulario" asp-action="Edit" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <h5>Permitido</h5>
+            <div class=" text-dark">
+               
+               <input type="checkbox">
+                
+            </div>
+            <br />
+            <h5>Tipo Email ID</h5>
+            <div class="form-group text-dark">
+               
+                <select name="tipoEmail" class="form-control">
+                     <option> Comunicação de Movimentos </option>
+                    <option> Comunicação de Rebalanceamento da Carteira </option>
+                    <option> Mensagem de Feliz Aniversário </option>
+                </select>
+
+            </div>
+            <br />
+            <h5>Enviar Para ID</h5>
+            <div class="form-group text-dark">
+               
+                <select name="EnviarPara" class="form-control">
+                    <option> Cliente </option>
+                    <option> Consultor </option>
+                    <option> Ambos </option>
+                </select>
+               
+            </div>
+            <br />
+            <h5>Forma Envio RM ID</h5>
+            <div class="form-group text-dark">
+                 <select name="Forma" class="form-control" 
+                    <option> Destinatário </option>
+                    <option> Cópia </option>
+                    <option> Cópia Oculta </option>
+                 </select>
+
+               
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
