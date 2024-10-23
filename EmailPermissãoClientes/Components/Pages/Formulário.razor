@@ -1,57 +1,184 @@
 ﻿@page "/formulario"
+@using EmailPermissãoClientes.Models
+@using EmailPermissãoClientes.Repositorio
+@using EmailPermissãoClientes.Data
+@inject IPermissaoRepositorio ipermissaorepositorio
+
+
 <h1>Formulário</h1>
 
 <h3 class="text-dark">Editar</h3>
 <hr />
-<h4> {Nome do usuário} </h4
+@code{
+    public string tipoEmailID, formaEnvioRM, enviarParaID;
+    //private List<PermissaoCliente> Clientes { get; set; } = new();
+
+    // private void Edit(PermissaoCliente)
+    // {
+
+    // }
+
+    [Parameter]
+    public int? Id { get; set; }
+    PermissaoCliente pcliente = new PermissaoCliente();
+    PermissaoDbContext pdbcontext { get; set; }
+
+
+    async Task Save()
+    {
+        PermissaoCliente cliente_hipotetico = ipermissaorepositorio.ListarPorId(1);
+
+        // ipermissaorepositorio.Editar(pdbcontext.permissaoClientes);
+    }
+
+    public void definirTipoEmailID()
+    {
+        switch (ipermissaorepositorio.ListarPorId(1).TipoEmailID)
+        {
+            case 1:
+                tipoEmailID = "Comunicação de Rebalanceamento da Carteira";
+                break;
+
+            case 2:
+                tipoEmailID = "Comunicação de Movimentos";
+                break;
+            case 3:
+                tipoEmailID = "Mensagem de Feliz Aniversário";
+                break;
+        }
+    }
+
+    public void definirEnviarParaID()
+    {
+         switch (ipermissaorepositorio.ListarPorId(1).EnviarParaID)
+        {
+            case 1:
+                enviarParaID = "Cliente";
+                break;
+
+            case 2:
+                enviarParaID = "Consultor";
+                break;
+            case 3:
+                enviarParaID = "Ambos";
+                break;
+        }
+        
+    }
+
+     public void definirFormaEnvioRM()
+    {
+         switch (ipermissaorepositorio.ListarPorId(1).FormaEnvioRmID)
+        {
+            case 1:
+                formaEnvioRM = "Destinatário";
+                break;
+
+            case 2:
+                formaEnvioRM = "Cópia";
+                break;
+            case 3:
+                formaEnvioRM = "Cópia Oculta";
+                break;
+        }
+        
+    }
+
+
+    
+    
+
+}
+ 
+
+<h4> Consultando Usuário de Id = @ipermissaorepositorio.ListarPorId(1).ClientID </h4
+    
     <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-controller="Formulario" asp-action="Edit" method="post">
+    <div class="col-md-4" >
+        <form asp-controller="Permissao" asp-action="UpdateClient" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <h5>Permitido</h5>
+            <a> TESTE </a>
             <div class=" text-dark">
                
                <input type="checkbox">
                 
             </div>
             <br />
-            <h5>Tipo Email ID</h5>
-            <div class="form-group text-dark">
+            @{
+                definirEnviarParaID();
+                definirFormaEnvioRM();
+                definirTipoEmailID();
+            }
+
+            <h5>Tipo Email ID </h5>
+                <div class="form-group text-dark">
+                    <EditForm Model="pcliente" OnSubmit="Save" FormName="editClient">
+                        <input type="number" class="form-c ontrol" value="@ipermissaorepositorio.ListarPorId(1).TipoEmailID">
+                  
+                    
+                        <h1></h1>
+                        
+                         <h4> TIPO EMAIL  : @tipoEmailID </h4>
+                        @* TIPO EMAIL *@
+                        <select name="tipoEmail" class="form-control">
+                            <label asp-for="TipoEmail" class="control-label">Tipo Email ID !!!</label>
+                            @* @if(ipermissaorepositorio.ListarPorId(1).TipoEmailID == ) *@
+                           
+
+                            @* 2 *@
+                             <option> Comunicação de Movimentos </option> 
+                             @* 1 *@
+                            <option> Comunicação de Rebalanceamento da Carteira </option>
+                            @* 3 *@
+                            <option> Mensagem de Feliz Aniversário </option>
+                        </select>
+                        <h1></h1>
+                        <br />
+                        @* ENVIAR PARA *@
+                         <h5>Enviar Para ID</h5>
+                        <div class="form-group text-dark">
+                        <input type="number" class="form-c ontrol" value="@ipermissaorepositorio.ListarPorId(1).EnviarParaID">
+                         <h1></h1>
+                         <h4> ENVIAR PARA  : @enviarParaID </h4>
+                        <select name="EnviarPara" class="form-control">
+                            @* 2 *@
+                            <option> Cliente </option>
+                            @* 1 *@
+                            <option> Consultor </option>
+                            @* 3 *@
+                            <option> Ambos </option>
+                        </select>
                
-                <select name="tipoEmail" class="form-control">
-                     <option> Comunicação de Movimentos </option>
-                    <option> Comunicação de Rebalanceamento da Carteira </option>
-                    <option> Mensagem de Feliz Aniversário </option>
-                </select>
+                </div>
+                <br />
+                @* FORMA ENVIO RM *@
+                <h5>Forma Envio RM ID</h5>
+                <div class="form-group text-dark">
+                    <input type="number" class="form-c ontrol" value="@ipermissaorepositorio.ListarPorId(1).FormaEnvioRmID">
+                     <h1></h1>
+                     <h4> FORMA ENVIO : @formaEnvioRM </h4>
+                     <select name="Forma" class="form-control" 
+                        @*    3 *@
+                        <option> Destinatário </option>
+                        @* 2 *@
+                        <option> Cópia </option>
+                        @*    1 *@
+                        <option> Cópia Oculta </option>
+                     </select>
+
+               
+                </div>
+                    <input type="submit" value="Salvar" class="btn btn-primary" />
+                </EditForm>
+               
 
             </div>
-            <br />
-            <h5>Enviar Para ID</h5>
-            <div class="form-group text-dark">
-               
-                <select name="EnviarPara" class="form-control">
-                    <option> Cliente </option>
-                    <option> Consultor </option>
-                    <option> Ambos </option>
-                </select>
-               
-            </div>
-            <br />
-            <h5>Forma Envio RM ID</h5>
-            <div class="form-group text-dark">
-                 <select name="Forma" class="form-control" 
-                    <option> Destinatário </option>
-                    <option> Cópia </option>
-                    <option> Cópia Oculta </option>
-                 </select>
-
-               
-            </div>
-            <br />
+           
             <div class="form-group">
-                <input type="submit" value="Salvar" class="btn btn-primary" />
+                
             </div>
         </form>
     </div>

@@ -11,9 +11,9 @@ namespace EmailPermissãoClientes.Data
 
         }
 
-        DbSet<PermissaoCliente> permissaoClientes { get; set; }
-        DbSet<PermissaoFormaEnvio> permissaoFormaEnvios { get; set; }
-        DbSet<PermissaoEnviarPara> permissaoEnviarPara { get; set; }
-        DbSet<PermissaoTipo> permissaoTipos { get; set; }
+        public DbSet<PermissaoCliente> permissaoClientes { get; set; }
+        public DbSet<PermissaoFormaEnvio> permissaoFormaEnvios { get; set; }
+        public DbSet<PermissaoEnviarPara> permissaoEnviarPara { get; set; }
+        public DbSet<PermissaoTipo> permissaoTipos { get; set; }
     }
 }

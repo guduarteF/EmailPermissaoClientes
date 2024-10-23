@@ -10,7 +10,7 @@ namespace EmailPermissãoClientes.Models
         public int ClientID { get; set; }
         public bool Permitido { get; set; }
         public int TipoEmailID { get; set; }
-        public int EnviarParID { get; set; }
+        public int EnviarParaID { get; set; }
         public int FormaEnvioRmID { get; set; }
         
 

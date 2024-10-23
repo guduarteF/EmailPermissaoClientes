@@ -1,5 +1,6 @@
 using EmailPermissãoClientes.Components;
 using EmailPermissãoClientes.Data;
+using EmailPermissãoClientes.Repositorio;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.AddDbContext<PermissaoDbContext>(o => o.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<IPermissaoRepositorio, PermissaoRepositorio>();
 
 var app = builder.Build();
 
