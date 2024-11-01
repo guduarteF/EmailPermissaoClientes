@@ -8,7 +8,7 @@ namespace EmailPermissãoClientes.Models
         [Key]
         public int FormaEnvioRmID { get; set; }
         public string Descricao { get; set; }
-        public PermissaoCliente permissaoClientes { get; set; }
+        
 
     }
 }

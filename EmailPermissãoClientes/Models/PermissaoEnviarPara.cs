@@ -8,6 +8,6 @@ namespace EmailPermissãoClientes.Models
         [Key]
         public int EnviarParaID { get; set; }
         public string Descrição { get; set; }
-        public PermissaoCliente permissaoClientes { get; set; }
+       
     }
 }

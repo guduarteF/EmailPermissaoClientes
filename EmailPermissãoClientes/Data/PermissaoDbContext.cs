@@ -1,5 +1,6 @@
 ﻿using EmailPermissãoClientes.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 
 namespace EmailPermissãoClientes.Data
 {

@@ -10,7 +10,8 @@
 <h3 class="text-dark">Editar</h3>
 <hr />
 @code{
-    public string tipoEmailID, formaEnvioRM, enviarParaID;
+    public int tipoEmailID, formaEnvioRM, enviarParaID;
+    public string descricao_tipoID, descricao_formaID, descricao_enviar_paraID;
     //private List<PermissaoCliente> Clientes { get; set; } = new();
 
     // private void Edit(PermissaoCliente)
@@ -33,34 +34,34 @@
 
     public void definirTipoEmailID()
     {
-        switch (ipermissaorepositorio.ListarPorId(1).TipoEmailID)
+        switch (ipermissaorepositorio.ListarPermissaoTipo(1).TipoEmailID)
         {
             case 1:
-                tipoEmailID = "Comunicação de Rebalanceamento da Carteira";
+                descricao_tipoID = "Comunicação de Rebalanceamento da Carteira";
                 break;
 
             case 2:
-                tipoEmailID = "Comunicação de Movimentos";
+                descricao_tipoID = "Comunicação de Movimentos";
                 break;
             case 3:
-                tipoEmailID = "Mensagem de Feliz Aniversário";
+                descricao_tipoID = "Mensagem de Feliz Aniversário";
                 break;
         }
     }
 
     public void definirEnviarParaID()
     {
-         switch (ipermissaorepositorio.ListarPorId(1).EnviarParaID)
+         switch (ipermissaorepositorio.ListarPermissaoEnviarPara(1).EnviarParaID)
         {
             case 1:
-                enviarParaID = "Cliente";
+                descricao_enviar_paraID = "Cliente";
                 break;
 
             case 2:
-                enviarParaID = "Consultor";
+                descricao_enviar_paraID = "Consultor";
                 break;
             case 3:
-                enviarParaID = "Ambos";
+                descricao_enviar_paraID = "Ambos";
                 break;
         }
         
@@ -68,17 +69,17 @@
 
      public void definirFormaEnvioRM()
     {
-         switch (ipermissaorepositorio.ListarPorId(1).FormaEnvioRmID)
+         switch (ipermissaorepositorio.ListarFormaPermissao(1).FormaEnvioRmID)
         {
             case 1:
-                formaEnvioRM = "Destinatário";
+                descricao_formaID = "Destinatário";
                 break;
 
             case 2:
-                formaEnvioRM = "Cópia";
+                descricao_formaID = "Cópia";
                 break;
             case 3:
-                formaEnvioRM = "Cópia Oculta";
+                descricao_formaID = "Cópia Oculta";
                 break;
         }
         
@@ -121,13 +122,12 @@
                     
                         <h1></h1>
                         
-                         <h4> TIPO EMAIL  : @tipoEmailID </h4>
+                         <h4> TIPO EMAIL  : @descricao_tipoID </h4>
                         @* TIPO EMAIL *@
                         <select name="tipoEmail" class="form-control">
                             <label asp-for="TipoEmail" class="control-label">Tipo Email ID !!!</label>
                             @* @if(ipermissaorepositorio.ListarPorId(1).TipoEmailID == ) *@
                            
-
                             @* 2 *@
                              <option> Comunicação de Movimentos </option> 
                              @* 1 *@
@@ -142,7 +142,7 @@
                         <div class="form-group text-dark">
                         <input type="number" class="form-c ontrol" value="@ipermissaorepositorio.ListarPorId(1).EnviarParaID">
                          <h1></h1>
-                         <h4> ENVIAR PARA  : @enviarParaID </h4>
+                         <h4> ENVIAR PARA  : @descricao_enviar_paraID </h4>
                         <select name="EnviarPara" class="form-control">
                             @* 2 *@
                             <option> Cliente </option>
@@ -159,7 +159,7 @@
                 <div class="form-group text-dark">
                     <input type="number" class="form-c ontrol" value="@ipermissaorepositorio.ListarPorId(1).FormaEnvioRmID">
                      <h1></h1>
-                     <h4> FORMA ENVIO : @formaEnvioRM </h4>
+                     <h4> FORMA ENVIO : @descricao_formaID </h4>
                      <select name="Forma" class="form-control" 
                         @*    3 *@
                         <option> Destinatário </option>

@@ -11,6 +11,6 @@ namespace EmailPermissãoClientes.Models
         public int TipoEmailID { get; set; }
 
         public string Descrição { get; set;}
-        public PermissaoCliente permissaoClientes { get; set; }
+        
     }
 }
